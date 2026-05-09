@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Fern Landscaping & Lawn Care</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --green: #2d6a4f;
+    --green-dark: #1b4332;
+    --green-mid: #40916c;
+    --green-light: #d8f3dc;
+    --green-pale: #f0faf2;
+    --text: #1a2e1e;
+    --muted: #52796f;
+    --border: #cde8d4;
+    --white: #ffffff;
+    --off: #f7faf8;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--white); line-height: 1.6; }
+
+  nav {
+    background: var(--green-dark);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 3px solid var(--green-mid);
+  }
+  .logo { display: flex; align-items: center; gap: 10px; }
+  .logo-icon { width: 38px; height: 38px; background: var(--green-mid); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+  .logo-text { font-family: 'DM Serif Display', serif; font-size: 1.15rem; color: white; line-height: 1.1; }
+  .logo-text span { display: block; font-family: 'DM Sans', sans-serif; font-size: 0.65rem; font-weight: 400; letter-spacing: 0.12em; color: #90c9a8; text-transform: uppercase; }
+  nav ul { list-style: none; display: flex; gap: 1.5rem; align-items: center; }
+  nav a { color: #a8cbb5; text-decoration: none; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s; }
+  nav a:hover { color: white; }
+  .nav-cta { background: var(--green-mid) !important; color: white !important; padding: 8px 18px; border-radius: 100px; }
+  .nav-cta:hover { background: var(--green) !important; }
+
+  .hero {
+    background: var(--green-dark);
+    padding: 5rem 2rem 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-leaf { position: absolute; opacity: 0.04; font-size: 18rem; top: -2rem; right: -2rem; line-height: 1; pointer-events: none; }
+  .hero-leaf2 { position: absolute; opacity: 0.03; font-size: 12rem; bottom: -1rem; left: -1rem; line-height: 1; pointer-events: none; }
+  .hero-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(64,145,108,0.2); border: 1px solid rgba(64,145,108,0.4); color: #90c9a8; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 5px 16px; border-radius: 100px; margin-bottom: 1.5rem; }
+  .hero h1 { font-family: 'DM Serif Display', serif; font-size: clamp(2.6rem, 6vw, 4.2rem); color: white; line-height: 1.05; margin-bottom: 1rem; max-width: 680px; }
+  .hero h1 em { color: #74c69d; font-style: normal; }
+  .hero p { color: #7fb996; font-size: 1rem; max-width: 500px; margin-bottom: 2rem; font-weight: 300; }
+  .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+  .btn-primary { background: var(--green-mid); color: white; padding: 13px 28px; border-radius: 100px; font-weight: 600; font-size: 0.9rem; text-decoration: none; border: none; cursor: pointer; transition: background 0.2s, transform 0.1s; letter-spacing: 0.02em; }
+  .btn-primary:hover { background: var(--green); transform: translateY(-1px); }
+  .btn-outline { background: transparent; color: white; padding: 13px 28px; border-radius: 100px; font-weight: 500; font-size: 0.9rem; text-decoration: none; border: 1.5px solid rgba(255,255,255,0.25); cursor: pointer; transition: border-color 0.2s, background 0.2s; }
+  .btn-outline:hover { border-color: white; background: rgba(255,255,255,0.06); }
+
+  .stat-bar { background: var(--green-mid); padding: 1.2rem 2rem; display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; }
+  .stat { text-align: center; }
+  .stat-num { font-family: 'DM Serif Display', serif; font-size: 1.9rem; color: white; line-height: 1; }
+  .stat-label { font-size: 0.7rem; color: rgba(255,255,255,0.7); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 500; }
+
+  section { padding: 4rem 2rem; }
+  .section-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--green-mid); margin-bottom: 0.5rem; }
+  .section-title { font-family: 'DM Serif Display', serif; font-size: clamp(1.9rem, 4vw, 2.8rem); color: var(--green-dark); line-height: 1.1; margin-bottom: 0.75rem; }
+  .section-sub { color: var(--muted); font-size: 1rem; max-width: 540px; font-weight: 300; }
+
+  .services-bg { background: var(--off); }
+  .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1rem; max-width: 900px; margin-top: 2.5rem; }
+  .service-card { background: var(--white); border: 1.5px solid var(--border); border-radius: 14px; padding: 1.5rem; transition: border-color 0.2s, transform 0.2s; }
+  .service-card:hover { border-color: var(--green-mid); transform: translateY(-2px); }
+  .service-icon { width: 46px; height: 46px; border-radius: 12px; background: var(--green-pale); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; margin-bottom: 1rem; }
+  .service-card h3 { font-family: 'DM Serif Display', serif; font-size: 1.05rem; color: var(--green-dark); margin-bottom: 0.4rem; }
+  .service-card p { font-size: 0.84rem; color: var(--muted); line-height: 1.55; }
+
+  .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; max-width: 900px; align-items: start; }
+  .why-features { display: flex; flex-direction: column; gap: 1.2rem; margin-top: 1.5rem; }
+  .why-item { display: flex; gap: 1rem; align-items: flex-start; }
+  .why-dot { width: 34px; height: 34px; min-width: 34px; border-radius: 50%; background: var(--green-pale); border: 1.5px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 1rem; margin-top: 2px; }
+  .why-item h4 { font-weight: 600; font-size: 0.95rem; color: var(--green-dark); margin-bottom: 2px; }
+  .why-item p { font-size: 0.84rem; color: var(--muted); }
+
+  .why-highlight {
+    background: var(--green-dark);
+    border-radius: 18px;
+    padding: 2.5rem 2rem;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .highlight-stat { text-align: center; }
+  .highlight-stat .big { font-family: 'DM Serif Display', serif; font-size: 3rem; color: #74c69d; line-height: 1; }
+  .highlight-stat p { font-size: 0.8rem; color: #7fb996; text-transform: uppercase; letter-spacing: 0.08em; margin-top: 4px; }
+  .highlight-divider { border: none; border-top: 1px solid rgba(255,255,255,0.1); }
+  .highlight-quote { font-size: 0.9rem; color: #a8cbb5; font-weight: 300; line-height: 1.6; font-style: italic; }
+  .highlight-author { font-size: 0.8rem; font-weight: 600; color: #d8f3dc; margin-top: 0.5rem; }
+
+  .reviews-bg { background: var(--green-dark); }
+  .reviews-bg .section-label { color: #74c69d; }
+  .reviews-bg .section-title { color: white; }
+  .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; max-width: 900px; margin-top: 2.5rem; }
+  .review-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; padding: 1.4rem; }
+  .stars { color: #f5c842; font-size: 0.9rem; margin-bottom: 0.6rem; }
+  .review-card p { font-size: 0.85rem; color: #a8cbb5; line-height: 1.6; margin-bottom: 0.9rem; font-weight: 300; }
+  .reviewer-mini { font-size: 0.82rem; font-weight: 600; color: #d8f3dc; }
+  .reviewer-date { font-size: 0.74rem; color: #52796f; }
+
+  .cta-section { background: var(--green-pale); border-top: 3px solid var(--green-light); padding: 4rem 2rem; text-align: center; }
+  .cta-section h2 { font-family: 'DM Serif Display', serif; font-size: clamp(2rem, 5vw, 3rem); color: var(--green-dark); margin-bottom: 0.75rem; }
+  .cta-section p { color: var(--muted); font-size: 1rem; margin-bottom: 2rem; font-weight: 300; }
+  .cta-phone { display: inline-flex; align-items: center; gap: 8px; background: var(--green-dark); color: white; padding: 14px 36px; border-radius: 100px; font-size: 1.1rem; font-weight: 600; text-decoration: none; transition: background 0.2s; letter-spacing: 0.02em; }
+  .cta-phone:hover { background: var(--green); }
+  .cta-note { margin-top: 1rem; font-size: 0.78rem; color: #7fb996; letter-spacing: 0.04em; }
+
+  footer { background: var(--green-dark); color: #52796f; padding: 2rem; text-align: center; font-size: 0.8rem; }
+  .footer-links { display: flex; gap: 1.5rem; justify-content: center; margin-bottom: 0.75rem; flex-wrap: wrap; }
+  .footer-links a { color: #52796f; text-decoration: none; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em; }
+  .footer-links a:hover { color: white; }
+  footer strong { color: #90c9a8; }
+
+  @media (max-width: 640px) {
+    nav ul { display: none; }
+    .why-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">
+    <div class="logo-icon">🌿</div>
+    <div class="logo-text">
+      Fern Landscaping
+      <span>& Lawn Care</span>
+    </div>
+  </div>
+  <ul>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#contact" class="nav-cta">Get a Quote</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <div class="hero-leaf">🍃</div>
+  <div class="hero-leaf2">🌱</div>
+  <div class="hero-badge">⭐ Top Rated · Locally Owned</div>
+  <h1>Your Yard,<br><em>Brought Back to Life.</em></h1>
+  <p>Professional landscaping, lawn care, mulching, weed control, and debris removal — done right and on time.</p>
+  <div class="hero-btns">
+    <a href="#contact" class="btn-primary">Get a Free Quote</a>
+    <a href="#services" class="btn-outline">Our Services</a>
+  </div>
+</div>
+
+<div class="stat-bar">
+  <div class="stat"><div class="stat-num">5.0</div><div class="stat-label">Google Rating</div></div>
+  <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Satisfaction</div></div>
+  <div class="stat"><div class="stat-num">On Time</div><div class="stat-label">Every Job</div></div>
+  <div class="stat"><div class="stat-num">Free</div><div class="stat-label">Estimates</div></div>
+</div>
+
+<section id="services" class="services-bg">
+  <div class="section-label">What We Do</div>
+  <h2 class="section-title">Full-Service Lawn & Landscape</h2>
+  <p class="section-sub">From weekly mowing to full yard transformations — we handle it all.</p>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">🌿</div>
+      <h3>Lawn Maintenance</h3>
+      <p>Regular mowing, edging, and trimming to keep your yard looking sharp all season.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🍂</div>
+      <h3>Mulching</h3>
+      <p>Fresh mulch installation that suppresses weeds and gives your beds a clean, finished look.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🌱</div>
+      <h3>Weed Control</h3>
+      <p>We tackle even the worst infestations and restore your garden beds to their best.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🚛</div>
+      <h3>Debris Removal</h3>
+      <p>Haul-off for yard waste, remodel debris, and junk — cleared out fast.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🌳</div>
+      <h3>Pine Straw Beds</h3>
+      <p>Beautiful pine straw installation around trees and landscape beds.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">✂️</div>
+      <h3>Cleanup & Restoration</h3>
+      <p>Full yard cleanups — spring, fall, or anytime your outdoor space needs a reset.</p>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="why-grid">
+    <div>
+      <div class="section-label">Why Fern</div>
+      <h2 class="section-title">We Do What We Say, When We Say It</h2>
+      <p class="section-sub">Fernie and his crew have built a reputation on reliability, quality, and going above and beyond for every customer.</p>
+      <div class="why-features">
+        <div class="why-item">
+          <div class="why-dot">✓</div>
+          <div>
+            <h4>Reliable & On Time</h4>
+            <p>We finish jobs early, not late. Your time matters.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-dot">🌿</div>
+          <div>
+            <h4>Above & Beyond Results</h4>
+            <p>We don't cut corners — every job is done to the highest standard.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-dot">💬</div>
+          <div>
+            <h4>Responsive & Personal</h4>
+            <p>You work directly with Fernie — clear communication every step of the way.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-dot">🔄</div>
+          <div>
+            <h4>Repeat Customers</h4>
+            <p>Most of our clients have used us multiple times — that says everything.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="why-highlight">
+      <div class="highlight-stat">
+        <div class="big">5.0★</div>
+        <p>Perfect Google Rating</p>
+      </div>
+      <hr class="highlight-divider"/>
+      <div>
+        <p class="highlight-quote">"Fern Landscaping went above and beyond my expectations. Fernie brought my yard back to life and made it look great!"</p>
+        <p class="highlight-author">— Juan Carreno, Google Review</p>
+      </div>
+      <hr class="highlight-divider"/>
+      <div class="highlight-stat">
+        <div class="big">3+</div>
+        <p>Years Serving the Community</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="reviews" class="reviews-bg">
+  <div class="section-label">Customer Reviews</div>
+  <h2 class="section-title">What Our Clients Say</h2>
+  <div class="reviews-grid">
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p>"Fern Landscaping went above and beyond my expectations. My mulch had all sorts of weeds but Fernie brought it back to life and made my yard look great!"</p>
+      <div class="reviewer-mini">Juan Carreno</div>
+      <div class="reviewer-date">1 year ago</div>
+    </div>
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p>"Used them multiple times. Most recently had them haul off remodel debris and they knocked it out a day early. They do what they say and when they say it."</p>
+      <div class="reviewer-mini">Bonifacio Nieto</div>
+      <div class="reviewer-date">2 years ago</div>
+    </div>
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p>"Hired them to clean up a weed-infested garden and add pine straw beds around my trees. He went above and beyond my expectations. Highly recommend!"</p>
+      <div class="reviewer-mini">Gustavo Acevedo</div>
+      <div class="reviewer-date">1 year ago</div>
+    </div>
+  </div>
+</section>
+
+<div id="contact" class="cta-section">
+  <h2>Ready for a Better Yard?</h2>
+  <p>Contact us today for a free estimate — no pressure, no obligation.</p>
+  <a href="#" class="cta-phone">🌿 Get a Free Quote</a>
+  <p class="cta-note">Locally Owned · Fully Insured · Free Estimates</p>
+</div>
+
+<footer>
+  <div class="footer-links">
+    <a href="#services">Services</a>
+    <a href="#about">About</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <p><strong>Fern Landscaping & Lawn Care</strong> · Locally Owned & Operated</p>
+  <p style="margin-top: 0.4rem;">© 2025 Fern Landscaping & Lawn Care. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
